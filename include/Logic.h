@@ -1,0 +1,34 @@
+#pragma once
+
+#include <Arduino.h>
+#include <time.h>
+#include "Config.h"
+#include "Actuators.h"
+
+// --- Shared Global State Variables ---
+// 'extern' tells the compiler these exist, but are defined in Logic.cpp
+extern WaterChangeState currentWaterChangeState;
+
+extern int feedHours[MAX_FEEDS];
+extern int feedMinutes[MAX_FEEDS];
+extern bool alreadyTriggered[MAX_FEEDS];
+extern int cycles;
+extern bool synced;
+extern float currentpHLevel;
+extern float currentTemperature;
+extern unsigned long waterOutCooldownMs;
+extern int currentShakeIntensityConfig;
+
+extern int cooldownHours;
+extern int cooldownMinutes;
+extern int cooldownSeconds;
+
+
+
+// --- High-Level Execution Prototypes ---
+void monitorPHLevel();
+void monitorTemperature();
+void processFeedingSchedule();
+void processWaterChangeState();
+void calculateDynamicCooldown();
+void updateCurrentShakeIntensity();
